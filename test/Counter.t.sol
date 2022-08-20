@@ -24,6 +24,7 @@ contract CounterTest is Test {
         uint256 res = LogCompression.fromLowResLog(logAmount);
 
         console2.log(res);
+        console2.log(res/1e18);
     }
 
 }
