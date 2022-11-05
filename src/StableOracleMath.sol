@@ -19,6 +19,8 @@ import "./FixedPoint.sol";
 
 import "./StableMath.sol";
 
+import "forge-std/console.sol";
+
 // These functions start with an underscore, as if they were part of a contract and not a library. At some point this
 // should be fixed.
 // solhint-disable private-vars-leading-underscore
@@ -34,7 +36,7 @@ library StableOracleMath {
         uint256 balanceX,
         uint256 balanceY,
         int256 logBptTotalSupply
-    ) internal pure returns (int256 logSpotPrice, int256 logBptPrice) {
+    ) internal view returns (int256 logSpotPrice, int256 logBptPrice) {
         uint256 spotPrice = _calcSpotPrice(amplificationParameter, balanceX, balanceY);
         logBptPrice = _calcLogBptPrice(spotPrice, balanceX, balanceY, logBptTotalSupply);
         logSpotPrice = LogCompression.toLowResLog(spotPrice);
@@ -47,7 +49,7 @@ library StableOracleMath {
         uint256 amplificationParameter,
         uint256 balanceX,
         uint256 balanceY
-    ) internal pure returns (uint256) {
+    ) internal view  returns (uint256) {
         /**************************************************************************************************************
         //                                                                                                           //
         //                             2.a.x.y + a.y^2 + b.y                                                         //
@@ -62,6 +64,8 @@ library StableOracleMath {
         **************************************************************************************************************/
 
         uint256 invariant = StableMath._calculateInvariant(amplificationParameter, _balances(balanceX, balanceY));
+
+        console.log(invariant);
 
         uint256 a = (amplificationParameter * 2) / StableMath._AMP_PRECISION;
         uint256 b = Math.mul(invariant, a).sub(invariant);

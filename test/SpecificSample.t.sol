@@ -1,0 +1,19 @@
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity 0.8.13;
+
+import "forge-std/Test.sol";
+
+import "src/SpecificSample.sol";
+
+contract SpecificSampleTest is Test {
+
+    SpecificSample internal s = new SpecificSample();
+
+    function setUp() public {
+
+    }
+    
+    function testGetX() public {
+        uint256 res = s.getX();
+    }
+}

@@ -2,6 +2,7 @@
 pragma solidity ^0.7.0;
 
 import "forge-std/Test.sol";
+import "forge-std/console.sol";
 
 import "src/LogCompression.sol";
 import "src/StableOracleMath.sol";
@@ -11,22 +12,18 @@ contract CounterTest is Test {
     function setUp() public {
 
     }
-    
-    function testLowResLog() public view {
+    function testToLowResLog() public view {
         // uint amount = 3000120398120398120;
-        uint amount = 1e6;
-        int256 res = LogCompression.toLowResLog(amount);
+        int256 amount = type(int256).max + 1;
+        int256 res = LogCompression.toLowResLog(uint256(amount));
+
         console.logInt(res);
-        console2.logUint(uint256(res));
     }
 
     function testFromLowResLog() public view {
-        int logAmount = -30291;
+        int logAmount = 1310000;
 
         uint256 res = LogCompression.fromLowResLog(logAmount);
-
-        console2.log(res);
-        console2.log(res/1e18);
     }
 
     function testRollTime() public 
@@ -40,8 +37,19 @@ contract CounterTest is Test {
     }
 
     function testCalcSpotPrice() public {
-        (int256 lLogSpotPrice, int256 lLogBptPrice) = StableOracleMath._calcLogPrices(1000, 1e18, 1e18, 2e18);
+        uint256 lSpotPrice = StableOracleMath._calcSpotPrice(1000, 2e15, 2e10);
+    }
 
-        console.logInt(lLogSpotPrice);
+    function testInt256Min() public {
+        
+        uint256 n = type(uint256).max;
+
+        uint256 imax = uint256(type(int256).max);
+
+        int256 ni = int256(imax);
+
+        console.log(imax);
+        console.logInt(ni);
+        
     }
 }
