@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.13;
+pragma solidity ^0.8.0;
 
 import "forge-std/Test.sol";
 
@@ -12,7 +12,7 @@ contract SpecificSampleTest is Test {
     function setUp() public {
 
     }
-    
+
     function testGetX() public {
         uint256 res = s.getX();
     }

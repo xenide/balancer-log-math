@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.7.0;
+pragma solidity ^0.8.0;
 
 import "forge-std/Test.sol";
 import "forge-std/console.sol";
@@ -26,7 +26,7 @@ contract CounterTest is Test {
         uint256 res = LogCompression.fromLowResLog(logAmount);
     }
 
-    function testRollTime() public 
+    function testRollTime() public
     {
         for (uint i = 0; i < 20; ++i) {
             console.log(block.number);
@@ -41,15 +41,17 @@ contract CounterTest is Test {
     }
 
     function testInt256Min() public {
-        
-        uint256 n = type(uint256).max;
 
-        uint256 imax = uint256(type(int256).max);
+        // uint256 n = type(uint256).max;
+        // uint256 imax = uint256(type(int256).min);
+        // int256 ni = int256(imax);
 
-        int256 ni = int256(imax);
+        int256 normal = type(int256).min;
+        int256 max = type(int256).max;
 
-        console.log(imax);
-        console.logInt(ni);
-        
+        -normal;
+
+        console.logInt(normal);
+        console.logInt(max);
     }
 }

@@ -1,4 +1,4 @@
-pragma solidity =0.8.13;
+pragma solidity ^0.8.0;
 library DateTimeChallenge {
     function toHours(uint8 _days) internal pure returns (uint256) {
         return 24 * _days;

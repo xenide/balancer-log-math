@@ -1,4 +1,3 @@
-
 pragma solidity ^0.8.0;
 
 import "forge-std/Test.sol";
@@ -23,8 +22,10 @@ contract DateTimeTest is Test
 
     function testHaha() external
     {
-        uint8 x = 5;
+        uint256 x = type(uint112).max;
 
-        console.log(5 ** 10);
+        uint256 y = type(uint112).max / 1e17;
+
+        console.log((x - 1) * 1e18 / y);
     }
 }
