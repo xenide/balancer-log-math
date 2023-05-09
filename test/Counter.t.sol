@@ -54,4 +54,17 @@ contract CounterTest is Test {
         console.logInt(normal);
         console.logInt(max);
     }
+
+    function testCastInt256IntoUint256Unchecked() public {
+        int256 lMax = type(int256).max;
+
+        console.logInt(lMax);
+
+
+        uint256 lAbs;
+        unchecked {
+            lAbs = uint256(lMax);
+        }
+        console.log(lAbs);
+    }
 }
